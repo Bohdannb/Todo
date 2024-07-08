@@ -1,20 +1,52 @@
-const button = document.querySelector (".container-input button");
-const list = document.querySelector (".todo-list");
-const input = document.querySelector (".container-input input");
+let input = document.querySelector('.main');
+let addBtn = document.querySelector('.addbtn');
+let tasks = document.querySelector('.tasks');
 
-button.addEventListener("click", () => {
-    const li = document.createElement("li");
-    list.appendChild(li);
-    li.innerText = input.value;
-    li.className = "todo-list-item";
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "delete";
-    li.appendChild(deleteBtn);
-    input.value = "";
+addBtn.addEventListener ('click', ()=>{
+    if(input.value.trim().lenght == '')
+        return;
 
-    deleteBtn.addEventListener("click", () => {
-        list.removeChild(li);
-    });
+
+    const itemTodo = document.createElement ('div');
+    itemTodo.classList.add('item-todo');
+
+    tasks.appendChild(itemTodo);
+
+    const todoList = document.createElement ('p');
+   todoList.id = 'todo-list';
+   todoList.innerText = input.value;
+
+   itemTodo.appendChild(todoList);
+
+
+   const editbtn = document.createElement ('button');
+   editbtn.id = 'edit-btn';
+   itemTodo.appendChild(editbtn);
+   editbtn.addEventListener('click', () =>{
+    input.value = todoList.innerText;
+    const parent = editbtn.parentElement;
+    parent.parentElement.removeChild(parent);
+   });
+
+   const deletebtn = document.createElement ('button');
+   deletebtn.id = 'delete-btn';
+   itemTodo.appendChild(deletebtn);
+
+   deletebtn.addEventListener('click', () =>{
+    const parent = deletebtn.parentElement;
+    parent.parentElement.removeChild(parent);
+   });
+
+
+
+
+
+
+   input.value = "";
 
 });
+
+
+
+
 
